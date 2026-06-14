@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: olivetti-face-recognizer
+  labels:
+    app: olivetti-face-recognizer
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: olivetti-face-recognizer
+  template:
+    metadata:
+      labels:
+        app: olivetti-face-recognizer
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: face-recognizer
+          image: g25ai1035/olivetti-face-recognizer:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
